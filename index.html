@@ -103,7 +103,7 @@
             <div id="carousel" class="flex h-full transition-transform duration-500 ease-in-out">
                 <div class="w-full flex-shrink-0 h-full relative">
                     <!-- 轮播图第一张 - 太平宫新貌全景 -->
-                    <img src="img/banner1.png" alt="太平宫新貌全景" class="w-full h-full object-cover">
+                    <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner1.png" alt="太平宫新貌全景" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-dark/40 flex items-center justify-center">
                         <h1 class="text-white text-4xl md:text-6xl font-bold text-center px-4 text-shadow">
                             龙脉之下，古庙新生
@@ -112,7 +112,7 @@
                 </div>
                 <div class="w-full flex-shrink-0 h-full relative">
                     <!-- 轮播图第二张 - 六尊佛像庄严特写 -->
-                    <img src="img/banner2.jpg" alt="六尊佛像庄严特写" class="w-full h-full object-cover">
+                    <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner2.png" alt="六尊佛像庄严特写" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-dark/40 flex items-center justify-center">
                         <h1 class="text-white text-4xl md:text-6xl font-bold text-center px-4 text-shadow">
                             供奉六圣，福泽一方
@@ -121,7 +121,7 @@
                 </div>
                 <div class="w-full flex-shrink-0 h-full relative">
                     <!-- 轮播图第三张 - 重建历程拼图 -->
-                    <img src="img/banner3.jpg" alt="重建历程拼图" class="w-full h-full object-cover">
+                    <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner3.jpg" alt="重建历程拼图" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-dark/40 flex items-center justify-center">
                         <h1 class="text-white text-4xl md:text-6xl font-bold text-center px-4 text-shadow">
                             薪火相传，再续华章
@@ -185,7 +185,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                 <div class="hover-scale">
                     <!-- 庆典活动现场效果图 -->
-                    <img src="img/banner4.jpg" alt="庆典活动现场效果图" class="w-full h-auto rounded-lg shadow-lg">
+                    <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner4.jpg" alt="庆典活动现场效果图" class="w-full h-auto rounded-lg shadow-lg">
                 </div>
                 <div>
                     <div class="space-y-6">
@@ -205,6 +205,69 @@
                             <h3 class="text-xl font-bold text-dark mb-2 flex items-center">
                                 <i class="fa fa-map-marker text-primary mr-2"></i>举办地点
                             </h3>
+<!-- ========== 活动地点板块（含太平宫高德地图） ========== -->
+<div class="activity-location-section" style="margin: 20px 0;">
+  <!-- 活动地点标题 -->
+  <h3 style="font-size: 18px; color: #333; margin: 0 0 10px 0;">活动地点</h3>
+  
+  <!-- 地点文字说明（按你提供的内容） -->
+  <p style="font-size: 14px; color: #666; margin: 0 0 15px 0;">感化里和坑太平宫（酉山卯向己酉己卯分金）</p>
+  
+  <!-- 高德地图容器（太平宫固定定位） -->
+  <div id="taipinggong-map" style="width: 100%; height: 300px; border-radius: 8px; border: 1px solid #eee;"></div>
+</div>
+
+<!-- 引入高德地图JS API（已替换为你提供的KEY） -->
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=9f764a879b3650b035142ae657e0ac46"></script>
+
+<script>
+// 初始化太平宫地图（仅展示，无多余逻辑）
+function initTaipinggongMap() {
+  // 1. 你提供的太平宫精准经纬度（经度在前，纬度在后）
+  var tpLng = 117.555257; // 经度
+  var tpLat = 25.413564;  // 纬度
+
+  // 2. 创建地图实例，中心点=太平宫
+  var map = new AMap.Map('taipinggong-map', {
+    zoom: 16, // 缩放级别（16级清晰看到太平宫周边）
+    center: [tpLng, tpLat], // 太平宫经纬度
+    resizeEnable: true, // 适配容器大小
+    scrollWheel: true, // 允许滚轮/双指缩放
+    // 隐藏多余控件，仅保留基础地图
+    features: ['road', 'building', 'poi']
+  });
+
+  // 3. 添加太平宫标记（红色定位点）
+  var marker = new AMap.Marker({
+    position: [tpLng, tpLat],
+    title: '感化里和坑太平宫',
+    icon: new AMap.Icon({
+      size: new AMap.Size(32, 32),
+      // 高德默认红色定位图标（无需自己传图）
+      image: 'https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png',
+      imageSize: new AMap.Size(32, 32)
+    })
+  });
+  map.add(marker);
+
+  // 4. 点击标记显示太平宫地址弹窗（按你提供的说明）
+  marker.on('click', function() {
+    var infoWindow = new AMap.InfoWindow({
+      content: '<div style="padding: 8px; font-size: 14px;">' +
+                '<strong>感化里和坑太平宫</strong><br>' +
+                '坐向：酉山卯向己酉己卯分金' +
+                '</div>',
+      offset: new AMap.Pixel(0, -30)
+    });
+    infoWindow.open(map, [tpLng, tpLat]);
+  });
+}
+
+// 页面加载完成后初始化地图
+window.onload = function() {
+  initTaipinggongMap();
+};
+</script>
                             <p class="text-lg">感化里和坑太平宫（酉山卯向己酉己卯分金）</p>
                         </div>
                         <div>
@@ -392,16 +455,16 @@
                 <div class="space-y-6">
                     <div class="hover-scale">
                         <!-- 太平宫历史影像 -->
-                        <img src="img/banner1.png" alt="太平宫历史影像" class="w-full h-auto rounded-lg shadow-lg">
+                        <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner1.png" alt="太平宫历史影像" class="w-full h-auto rounded-lg shadow-lg">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="hover-scale">
                             <!-- 重建动土仪式 -->
-                            <img src="img/banner2.jpg" alt="重建动土仪式" class="w-full h-auto rounded-lg shadow-md">
+                            <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner2.png" alt="重建动土仪式" class="w-full h-auto rounded-lg shadow-md">
                         </div>
                         <div class="hover-scale">
                             <!-- 上梁仪式 -->
-                            <img src="img/banner4.jpg" alt="上梁仪式" class="w-full h-auto rounded-lg shadow-md">
+                            <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner4.jpg" alt="上梁仪式" class="w-full h-auto rounded-lg shadow-md">
                         </div>
                     </div>
                     <div class="bg-primary/10 p-4 rounded-lg text-center">
@@ -427,7 +490,7 @@
                 <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
                     <div class="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center">
                         <!-- 捐赠人头像 -->
-                        <img src="img/zhang.jpg" alt="张初全先生" class="w-full h-full object-cover rounded-full">
+                        <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/zhang.jpg" alt="张初全先生" class="w-full h-full object-cover rounded-full">
                     </div>
                     <div class="text-center md:text-left">
                         <h4 class="text-xl font-bold">张初全 先生</h4>
@@ -454,13 +517,11 @@
                     <div class="flex justify-center">
                         <div class="w-64 h-64 bg-white flex items-center justify-center border-2 border-primary/30 rounded-lg p-4">
                             <!-- 报名二维码 -->
-                            <img src="img/qrcode.jpg" alt="报名二维码" class="w-full h-full object-cover">
-                            
+                            <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/qrcode.jpg" alt="报名二维码" class="w-full h-full object-cover">
                         </div>
                     </div>
                     <p class="text-center mt-4 text-lg">扫码即可填写表单，快速锁定席位</p>
                 </div>
-                <p>或点击 <a href="https://docs.qq.com/form/page/DY3NZSUp4cnJHRkNO" target="_blank">https://docs.qq.com/form/page/DY3NZSUp4cnJHRkNO</a></p>；
             </div>
         </div>
     </section>
@@ -635,6 +696,3 @@
     </script>
 </body>
 </html>
-
-
-
