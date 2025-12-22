@@ -205,69 +205,7 @@
                             <h3 class="text-xl font-bold text-dark mb-2 flex items-center">
                                 <i class="fa fa-map-marker text-primary mr-2"></i>举办地点
                             </h3>
-<!-- ========== 活动地点板块（含太平宫高德地图） ========== -->
-<div class="activity-location-section" style="margin: 20px 0;">
-  <!-- 活动地点标题 -->
-  <h3 style="font-size: 18px; color: #333; margin: 0 0 10px 0;">活动地点</h3>
-  
-  <!-- 地点文字说明（按你提供的内容） -->
-  <p style="font-size: 14px; color: #666; margin: 0 0 15px 0;">感化里和坑太平宫（酉山卯向己酉己卯分金）</p>
-  
-  <!-- 高德地图容器（太平宫固定定位） -->
-  <div id="taipinggong-map" style="width: 100%; height: 300px; border-radius: 8px; border: 1px solid #eee;"></div>
-</div>
 
-<!-- 引入高德地图JS API（已替换为你提供的KEY） -->
-<script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=9f764a879b3650b035142ae657e0ac46"></script>
-
-<script>
-// 初始化太平宫地图（仅展示，无多余逻辑）
-function initTaipinggongMap() {
-  // 1. 你提供的太平宫精准经纬度（经度在前，纬度在后）
-  var tpLng = 117.555257; // 经度
-  var tpLat = 25.413564;  // 纬度
-
-  // 2. 创建地图实例，中心点=太平宫
-  var map = new AMap.Map('taipinggong-map', {
-    zoom: 16, // 缩放级别（16级清晰看到太平宫周边）
-    center: [tpLng, tpLat], // 太平宫经纬度
-    resizeEnable: true, // 适配容器大小
-    scrollWheel: true, // 允许滚轮/双指缩放
-    // 隐藏多余控件，仅保留基础地图
-    features: ['road', 'building', 'poi']
-  });
-
-  // 3. 添加太平宫标记（红色定位点）
-  var marker = new AMap.Marker({
-    position: [tpLng, tpLat],
-    title: '感化里和坑太平宫',
-    icon: new AMap.Icon({
-      size: new AMap.Size(32, 32),
-      // 高德默认红色定位图标（无需自己传图）
-      image: 'https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png',
-      imageSize: new AMap.Size(32, 32)
-    })
-  });
-  map.add(marker);
-
-  // 4. 点击标记显示太平宫地址弹窗（按你提供的说明）
-  marker.on('click', function() {
-    var infoWindow = new AMap.InfoWindow({
-      content: '<div style="padding: 8px; font-size: 14px;">' +
-                '<strong>感化里和坑太平宫</strong><br>' +
-                '坐向：酉山卯向己酉己卯分金' +
-                '</div>',
-      offset: new AMap.Pixel(0, -30)
-    });
-    infoWindow.open(map, [tpLng, tpLat]);
-  });
-}
-
-// 页面加载完成后初始化地图
-window.onload = function() {
-  initTaipinggongMap();
-};
-</script>
                             <p class="text-lg">感化里和坑太平宫（酉山卯向己酉己卯分金）</p>
                         </div>
                         <div>
