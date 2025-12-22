@@ -10,16 +10,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- 引入高德地图JS API -->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=9f764a879b3650b035142ae657e0ac46"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#8B4513', // 中式红木色
-                        secondary: '#D2B48C', // 桃木色
-                        accent: '#CD853F', // 棕金色
-                        dark: '#2D2A24', // 深褐色
-                        light: '#F5F5DC', // 米黄色
+                        primary: '#C41E3A', // 中国红
+                        secondary: '#FFD700', // 金黄色
+                        accent: '#FF6B35', // 橙红色
+                        dark: '#8B0000', // 深红色
+                        light: '#FFF8E7', // 米白色
                     },
                     fontFamily: {
                         serif: ['Noto Serif SC', 'serif'],
@@ -69,9 +71,10 @@
                 <a href="#history" class="text-dark hover:text-primary transition-colors font-medium">太平宫沿革</a>
                 <a href="#donation" class="text-dark hover:text-primary transition-colors font-medium">捐赠鸣谢</a>
                 <a href="#registration" class="text-dark hover:text-primary transition-colors font-medium">报名通道</a>
-                <button class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors">
+                <!-- 立即报名按钮 - 跳转至报名通道 -->
+                <a href="#registration" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors">
                     立即报名
-                </button>
+                </a>
             </nav>
 
             <!-- 移动端菜单按钮 -->
@@ -89,9 +92,10 @@
                 <a href="#history" class="text-dark hover:text-primary transition-colors font-medium py-2 border-b border-gray-100">太平宫沿革</a>
                 <a href="#donation" class="text-dark hover:text-primary transition-colors font-medium py-2 border-b border-gray-100">捐赠鸣谢</a>
                 <a href="#registration" class="text-dark hover:text-primary transition-colors font-medium py-2 border-b border-gray-100">报名通道</a>
-                <button class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors w-full">
+                <!-- 移动端立即报名按钮 - 跳转至报名通道 -->
+                <a href="#registration" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors w-full text-center">
                     立即报名
-                </button>
+                </a>
             </div>
         </div>
     </header>
@@ -103,7 +107,7 @@
             <div id="carousel" class="flex h-full transition-transform duration-500 ease-in-out">
                 <div class="w-full flex-shrink-0 h-full relative">
                     <!-- 轮播图第一张 - 太平宫新貌全景 -->
-                    <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner1.png" alt="太平宫新貌全景" class="w-full h-full object-cover">
+                    <img src="img/banner1.png" alt="太平宫新貌全景" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-dark/40 flex items-center justify-center">
                         <h1 class="text-white text-4xl md:text-6xl font-bold text-center px-4 text-shadow">
                             龙脉之下，古庙新生
@@ -112,7 +116,7 @@
                 </div>
                 <div class="w-full flex-shrink-0 h-full relative">
                     <!-- 轮播图第二张 - 六尊佛像庄严特写 -->
-                    <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner2.png" alt="六尊佛像庄严特写" class="w-full h-full object-cover">
+                    <img src="img/banner2.png" alt="六尊佛像庄严特写" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-dark/40 flex items-center justify-center">
                         <h1 class="text-white text-4xl md:text-6xl font-bold text-center px-4 text-shadow">
                             供奉六圣，福泽一方
@@ -121,7 +125,7 @@
                 </div>
                 <div class="w-full flex-shrink-0 h-full relative">
                     <!-- 轮播图第三张 - 重建历程拼图 -->
-                    <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner3.jpg" alt="重建历程拼图" class="w-full h-full object-cover">
+                    <img src="img/banner3.jpg" alt="重建历程拼图" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-dark/40 flex items-center justify-center">
                         <h1 class="text-white text-4xl md:text-6xl font-bold text-center px-4 text-shadow">
                             薪火相传，再续华章
@@ -144,12 +148,20 @@
             </div>
         </div>
 
-        <!-- 核心邀请语 -->
+        <!-- 核心邀请语 - 替换为指定文本 -->
         <div class="container mx-auto px-4 py-12 md:py-16">
             <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
                 <p class="text-lg md:text-xl text-center leading-relaxed">
-                    亲爱的乡贤、各界热心人士及信众朋友们：<br><br>
-                    感化里和坑冬龙脉之下，太平宫历经沧桑而文脉永续。今逢新宫落成之盛事，谨以最诚挚之心，邀您共赴庆典，同沾吉庆，见证庙宇重生，共祈国泰民安！
+                    尊敬的各位善信/嘉宾：<br><br>
+                    感化里和坑冬内山脚，仙境寶地今起威宇華庭。<br>
+                    溪南和坑太平宫為共襄盛舉，拟定于2025年12月29日（農历十一月初十），舉行重建盛大落成慶典。<br>
+                    届時将進行巡游活動及佛像入宫仪式，并有舞狮、樂隊、歌舞等到場助興。佛恩浩荡，活動期间太平宫膳食区将為所有来客提供免费美食。<br><br>
+                    现诚邀廣大善信、嘉宾莅临现場，共沐佛恩、同沾法喜。<br>
+                    美丽太平宫期待与您温暖邂逅。<br><br>
+                    敬祝吉祥如意、福慧双增！<br>
+                    和坑太平宫重建理事会<br>
+                    二0二五年冬月<br><br>
+                    （温馨提示：为确保庆典期间道路通畅，凡当日参加活动的机动车，车流高峰期，返回时建议绕转大坑至溪南中学路线行驶。多谢配合，祝您一路顺风！）
                 </p>
             </div>
         </div>
@@ -166,7 +178,9 @@
                 <h3 class="text-xl font-bold mb-2">流程速览</h3>
                 <p>了解庆典完整环节</p>
             </button>
-            <a href="https://map.baidu.com/search/%E6%84%9F%E5%8C%96%E9%87%8C%E5%92%8C%E5%9D%91%E5%A4%AA%E5%B9%B3%E5%AE%AB/@12943288.847460446,2895507.680000001,16z?querytype=s&da_src=shareurl" target="_blank" class="bg-accent text-white p-8 rounded-lg shadow-md hover-scale flex flex-col items-center justify-center text-center">
+            <!-- 快速入口导航地图按钮 - 跳转高德APP -->
+            <a href="androidamap://viewMap?sourceApplication=太平宫庆典&poiname=感化里和坑太平宫&lat=25.413564&lon=117.555257&dev=0" 
+               class="bg-accent text-white p-8 rounded-lg shadow-md hover-scale flex flex-col items-center justify-center text-center">
                 <i class="fa fa-map-marker text-4xl mb-4"></i>
                 <h3 class="text-xl font-bold mb-2">导航地图</h3>
                 <p>一键导航至活动现场</p>
@@ -185,7 +199,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                 <div class="hover-scale">
                     <!-- 庆典活动现场效果图 -->
-                    <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner4.jpg" alt="庆典活动现场效果图" class="w-full h-auto rounded-lg shadow-lg">
+                    <img src="img/banner4.jpg" alt="庆典活动现场效果图" class="w-full h-auto rounded-lg shadow-lg">
                 </div>
                 <div>
                     <div class="space-y-6">
@@ -199,14 +213,35 @@
                             <h3 class="text-xl font-bold text-dark mb-2 flex items-center">
                                 <i class="fa fa-calendar text-primary mr-2"></i>举办时间
                             </h3>
-                            <p class="text-lg">二〇二六年 <span class="text-primary font-semibold">[具体日期]</span>（<span class="text-primary font-semibold">[星期X]</span>）</p>
+                            <p class="text-lg">二〇二五年十二月二十九日（農历十一月初十）</p>
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-dark mb-2 flex items-center">
                                 <i class="fa fa-map-marker text-primary mr-2"></i>举办地点
                             </h3>
-
                             <p class="text-lg">感化里和坑太平宫（酉山卯向己酉己卯分金）</p>
+                            
+                            <!-- 高德地图展示容器 -->
+                            <div id="taipinggong-map" class="w-full h-64 rounded-lg border border-gray-200 my-4"></div>
+                            
+                            <!-- 地图导航按钮 - 带精准经纬度跳转对应APP -->
+                            <div class="mt-4 flex flex-wrap gap-3">
+                                <!-- 百度地图跳转 - 带经纬度 -->
+                                <a href="bdapp://map/marker?location=25.413564,117.555257&title=感化里和坑太平宫&content=感化里和坑太平宫（酉山卯向己酉己卯分金）&src=太平宫庆典" 
+                                   target="_blank" class="flex items-center bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors">
+                                    <i class="fa fa-map text-sm mr-2"></i> 百度地图
+                                </a>
+                                <!-- 高德地图跳转 - 带精准经纬度 -->
+                                <a href="androidamap://viewMap?sourceApplication=太平宫庆典&poiname=感化里和坑太平宫&lat=25.413564&lon=117.555257&dev=0" 
+                                   class="flex items-center bg-[#00B42A] text-white px-4 py-2 rounded-md hover:bg-[#00A824] transition-colors">
+                                    <i class="fa fa-map-marker text-sm mr-2"></i> 高德地图
+                                </a>
+                                <!-- 苹果地图跳转 - 带精准经纬度 -->
+                                <a href="http://maps.apple.com/?q=感化里和坑太平宫&ll=25.413564,117.555257&z=16" 
+                                   class="flex items-center bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">
+                                    <i class="fa fa-map-o text-sm mr-2"></i> 苹果地图
+                                </a>
+                            </div>
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-dark mb-2 flex items-center">
@@ -393,16 +428,16 @@
                 <div class="space-y-6">
                     <div class="hover-scale">
                         <!-- 太平宫历史影像 -->
-                        <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner1.png" alt="太平宫历史影像" class="w-full h-auto rounded-lg shadow-lg">
+                        <img src="img/banner1.png" alt="太平宫历史影像" class="w-full h-auto rounded-lg shadow-lg">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="hover-scale">
                             <!-- 重建动土仪式 -->
-                            <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner2.png" alt="重建动土仪式" class="w-full h-auto rounded-lg shadow-md">
+                            <img src="img/banner2.png" alt="重建动土仪式" class="w-full h-auto rounded-lg shadow-md">
                         </div>
                         <div class="hover-scale">
                             <!-- 上梁仪式 -->
-                            <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/banner4.jpg" alt="上梁仪式" class="w-full h-auto rounded-lg shadow-md">
+                            <img src="img/banner4.jpg" alt="上梁仪式" class="w-full h-auto rounded-lg shadow-md">
                         </div>
                     </div>
                     <div class="bg-primary/10 p-4 rounded-lg text-center">
@@ -428,7 +463,7 @@
                 <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
                     <div class="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center">
                         <!-- 捐赠人头像 -->
-                        <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/zhang.jpg" alt="张初全先生" class="w-full h-full object-cover rounded-full">
+                        <img src="img/zhang.jpg" alt="张初全先生" class="w-full h-full object-cover rounded-full">
                     </div>
                     <div class="text-center md:text-left">
                         <h4 class="text-xl font-bold">张初全 先生</h4>
@@ -455,7 +490,7 @@
                     <div class="flex justify-center">
                         <div class="w-64 h-64 bg-white flex items-center justify-center border-2 border-primary/30 rounded-lg p-4">
                             <!-- 报名二维码 -->
-                            <img src="https://cdn.staticaly.com/gh/z99lz213/z99lz213.github.io@main/img/qrcode.jpg" alt="报名二维码" class="w-full h-full object-cover">
+                            <img src="img/qrcode.jpg" alt="报名二维码" class="w-full h-full object-cover">
                         </div>
                     </div>
                     <p class="text-center mt-4 text-lg">扫码即可填写表单，快速锁定席位</p>
@@ -468,8 +503,8 @@
     <footer class="bg-dark text-white py-12">
         <div class="container mx-auto px-4">
             <div class="border-t border-gray-700 pt-8 text-center">
-                <p>© 二〇二六年 华懋新材料科技股份有限公司 版权所有</p>
-                <p class="mt-2 text-gray-400">活动最终解释权归华懋新材料科技股份有限公司所有，如有行程调整将提前通知</p>
+                <p>© 二〇二五年 和坑太平宫重建理事会 版权所有</p>
+                <p class="mt-2 text-gray-400">活动最终解释权归和坑太平宫重建理事会所有，如有行程调整将提前通知</p>
                 <p class="mt-2 text-gray-400">隐私政策：我们将严格保护您的个人信息，仅用于活动相关事宜</p>
             </div>
         </div>
@@ -631,6 +666,40 @@
                 closeModalFunc();
             }
         });
+
+        // 初始化太平宫高德地图展示
+        window.onload = function() {
+            // 太平宫经纬度
+            var tpLng = 117.555257; // 经度
+            var tpLat = 25.413564;  // 纬度
+
+            // 创建地图实例
+            var map = new AMap.Map('taipinggong-map', {
+                zoom: 16, // 缩放级别
+                center: [tpLng, tpLat], // 中心点坐标
+                resizeEnable: true,
+                scrollWheel: true
+            });
+
+            // 添加标记点
+            var marker = new AMap.Marker({
+                position: [tpLng, tpLat],
+                title: '感化里和坑太平宫'
+            });
+            map.add(marker);
+
+            // 添加信息弹窗
+            var infoWindow = new AMap.InfoWindow({
+                content: '<div style="padding: 8px; font-size: 14px;">' +
+                          '<strong>感化里和坑太平宫</strong><br>' +
+                          '坐向：酉山卯向己酉己卯分金' +
+                          '</div>',
+                offset: new AMap.Pixel(0, -30)
+            });
+            marker.on('click', function() {
+                infoWindow.open(map, [tpLng, tpLat]);
+            });
+        };
     </script>
 </body>
 </html>
