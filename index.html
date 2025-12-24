@@ -393,7 +393,7 @@
                         
                         <!-- 地图导航按钮：优化高德跳转，移除百度地图，苹果地图始终显示 -->
                         <div class="mt-4 flex flex-wrap gap-3">
-                            <!-- 高德地图：优化多端适配跳转 -->
+                            <!-- 高德地图：优化多端适配跳转（重点适配VIVO OriginOS） -->
                             <a id="amapNavBtn" href="javascript:void(0);" 
                                class="sys-btn flex items-center bg-[#00B42A] text-white px-4 py-2 rounded-md hover:bg-[#00A824] transition-colors">
                                 <i class="fa fa-map-marker text-sm mr-2"></i> 高德地图
@@ -514,53 +514,79 @@
             showSlide(nextSlide);
         }, 5000);
         
-        // 设备检测函数
+        // 增强版设备检测函数（识别VIVO OriginOS）
         function detectDevice() {
             const ua = navigator.userAgent;
             return {
                 isMobile: /iPhone|iPad|iPod|Android/i.test(ua),
                 isIOS: /iPhone|iPad|iPod/i.test(ua),
                 isAndroid: /Android/i.test(ua),
+                isVIVO: /vivo|VIVO|OriginOS/i.test(ua), // 识别VIVO/OriginOS
                 isPC: !/iPhone|iPad|iPod|Android/i.test(ua)
             };
         }
         
-        // 初始化地图导航按钮（优化高德跳转，取消苹果地图隐藏逻辑）
+        // 初始化地图导航按钮（重点优化VIVO OriginOS适配）
         function initMapNavButtons() {
             const device = detectDevice();
             const amapBtn = document.getElementById('amapNavBtn');
             
-            // 优化高德地图跳转逻辑 - 更稳定的多端适配
+            // 优化高德地图跳转逻辑 - 重点适配VIVO OriginOS
             amapBtn.addEventListener('click', function() {
-                // 优先尝试APP跳转，失败后自动降级到网页版
-                const amapWebUrl = 'https://amap.com/navigation?lat=25.413564&lng=117.555257&name=感化里和坑太平宫&type=0';
+                // 坐标常量定义
+                const lat = 25.413564;
+                const lng = 117.555257;
+                const name = encodeURIComponent('感化里和坑太平宫');
                 
-                if (device.isAndroid) {
-                    // 安卓端高德地图跳转 - 优化跳转逻辑
-                    const amapAndroidUrl = 'amapuri://route/plan/?dlat=25.413564&dlon=117.555257&dname=感化里和坑太平宫&dev=0&t=0';
-                    // 创建隐藏的iframe尝试跳转APP
-                    const iframe = document.createElement('iframe');
-                    iframe.style.display = 'none';
-                    iframe.src = amapAndroidUrl;
-                    document.body.appendChild(iframe);
+                // 网页版URL（修复坐标传递问题，使用标准参数）
+                const amapWebUrl = `https://uri.amap.com/navigation?from=myLocation&to=${lat},${lng}&toName=${name}&mode=car&policy=1&src=webapp.amap.com`;
+                
+                if (device.isVIVO) {
+                    // VIVO OriginOS 专属适配
+                    // 使用多种协议尝试跳转，提高成功率
+                    const amapVIVOUrls = [
+                        `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`,
+                        `androidamap://navi?sourceApplication=amap&lat=${lat}&lon=${lng}&dev=0&style=2`,
+                        `amap://navi?sourceApplication=amap&lat=${lat}&lon=${lng}&dev=0&style=2`
+                    ];
                     
-                    // 3秒后检查是否跳转成功，未成功则打开网页版
+                    // 尝试第一种协议
+                    window.location.href = amapVIVOUrls[0];
+                    
+                    // 备用方案：依次尝试其他协议
                     setTimeout(() => {
-                        document.body.removeChild(iframe);
-                        window.open(amapWebUrl, '_blank');
-                    }, 3000);
-                } else if (device.isIOS) {
-                    // IOS端高德地图跳转 - 优化跳转逻辑
-                    const amapIOSUrl = 'iosamap://path?sourceApplication=applicationName&dlat=25.413564&dlon=117.555257&dname=感化里和坑太平宫&dev=0&t=0';
-                    window.location.href = amapIOSUrl;
+                        window.location.href = amapVIVOUrls[1];
+                    }, 1000);
                     
-                    // 2秒后降级到网页版
+                    // 最终降级到网页版
                     setTimeout(() => {
                         window.open(amapWebUrl, '_blank');
                     }, 2000);
+                    
+                } else if (device.isAndroid) {
+                    // 普通安卓设备
+                    const amapAndroidUrl = `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`;
+                    window.location.href = amapAndroidUrl;
+                    
+                    // 降级到网页版
+                    setTimeout(() => {
+                        window.open(amapWebUrl, '_blank');
+                    }, 2000);
+                    
+                } else if (device.isIOS) {
+                    // IOS设备
+                    const amapIOSUrl = `iosamap://path?sourceApplication=applicationName&dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`;
+                    window.location.href = amapIOSUrl;
+                    
+                    // 降级到网页版
+                    setTimeout(() => {
+                        window.open(amapWebUrl, '_blank');
+                    }, 2000);
+                    
                 } else {
-                    // PC端直接打开高德地图网页版详情页
-                    window.open('https://www.amap.com/search?query=感化里和坑太平宫&location=117.555257,25.413564', '_blank');
+                    // PC端 - 修复坐标传递问题
+                    const pcAmapUrl = `https://www.amap.com/navigation/index?backurl=https://www.amap.com/&fromcoord=116.481028,39.989643&tocoord=${lng},${lat}&to=${name}&type=car&policy=1`;
+                    window.open(pcAmapUrl, '_blank');
                 }
             });
         }
@@ -608,19 +634,27 @@
                     liteStyle: device.isMobile
                 }));
                 
-                // 优化地图点击事件的导航逻辑
+                // 优化地图点击事件的导航逻辑（适配VIVO）
                 map.on('click', function() {
                     if (device.isMobile) {
                         const confirmNav = confirm('是否打开高德地图导航至太平宫？');
                         if (confirmNav) {
-                            const amapWebUrl = 'https://amap.com/navigation?lat=25.413564&lng=117.555257&name=感化里和坑太平宫&type=0';
+                            const lat = 25.413564;
+                            const lng = 117.555257;
+                            const name = encodeURIComponent('感化里和坑太平宫');
+                            const amapWebUrl = `https://uri.amap.com/navigation?from=myLocation&to=${lat},${lng}&toName=${name}&mode=car&policy=1&src=webapp.amap.com`;
                             
-                            if (device.isAndroid) {
-                                const amapAndroidUrl = 'amapuri://route/plan/?dlat=25.413564&dlon=117.555257&dname=感化里和坑太平宫&dev=0&t=0';
+                            if (device.isVIVO) {
+                                // VIVO设备优先使用兼容协议
+                                const amapVIVOUrl = `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`;
+                                window.location.href = amapVIVOUrl;
+                                setTimeout(() => window.open(amapWebUrl, '_blank'), 2000);
+                            } else if (device.isAndroid) {
+                                const amapAndroidUrl = `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`;
                                 window.location.href = amapAndroidUrl;
                                 setTimeout(() => window.open(amapWebUrl, '_blank'), 2000);
                             } else if (device.isIOS) {
-                                const amapIOSUrl = 'iosamap://path?sourceApplication=applicationName&dlat=25.413564&dlon=117.555257&dname=感化里和坑太平宫&dev=0&t=0';
+                                const amapIOSUrl = `iosamap://path?sourceApplication=applicationName&dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`;
                                 window.location.href = amapIOSUrl;
                                 setTimeout(() => window.open(amapWebUrl, '_blank'), 2000);
                             }
@@ -635,7 +669,7 @@
                 
             } catch (e) {
                 console.error('地图初始化失败:', e);
-                // 降级处理：显示静态地图图片
+                // 降级处理：显示静态地图图片（带坐标）
                 document.getElementById('taipinggong-map').innerHTML = `
                     <img src="https://restapi.amap.com/v3/staticmap?location=117.555257,25.413564&zoom=15&size=600*400&markers=mid,,A:117.555257,25.413564&key=9f764a879b3650b035142ae657e0ac46" 
                          alt="感化里和坑太平宫位置" 
