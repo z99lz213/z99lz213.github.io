@@ -421,7 +421,6 @@
     <footer class="bg-dark text-white py-8">
         <div class="container mx-auto px-4 text-center">
             <p class="text-lg mb-2">和坑太平宫重建理事会 版权所有</p>
-            <p class="text-sm opacity-80">地址：感化里和坑太平宫 | 联系电话：0596-XXXXXXX</p>
             <p class="text-sm opacity-80 mt-2">© 2025 太平宫重建庆典 保留所有权利</p>
         </div>
     </footer>
@@ -499,7 +498,7 @@
             // 核心坐标（固化，避免参数传递错误）
             const lat = 25.413564;
             const lng = 117.555257;
-            const name = encodeURIComponent('和坑太平宫');
+            const name = encodeURIComponent('上和坑');
             
             // 高德地图按钮点击事件
             amapBtn.addEventListener('click', function() {
@@ -596,7 +595,7 @@
                 // 添加精准标记点
                 const marker = new AMap.Marker({
                     position: [lng, lat],
-                    title: '和坑太平宫',
+                    title: '上和坑',
                     map: map,
                     icon: new AMap.Icon({
                         size: new AMap.Size(40, 40), // 放大标记，更易识别
@@ -628,18 +627,18 @@
                         const confirmNav = confirm('是否打开高德地图导航至太平宫？');
                         if (confirmNav) {
                             // 使用高德地图标准参数格式
-                            const amapWebUrl = `https://www.amap.com/map/navigation?tocoord=${lng},${lat}&to=${encodeURIComponent('和坑太平宫')}&type=car&policy=1`;
+                            const amapWebUrl = `https://www.amap.com/map/navigation?tocoord=${lng},${lat}&to=${encodeURIComponent('上和坑')}&type=car&policy=1`;
                             
                             if (device.isVIVO) {
                                 const intentUrl = `intent://navi/#Intent;scheme=amapuri;package=com.autonavi.minimap;action=android.intent.action.VIEW;category=android.intent.category.DEFAULT;component=com.autonavi.minimap/.api.bundle.MapActivity;S.dlat=${lat};S.dlon=${lng};S.dname=${encodeURIComponent('和坑太平宫')};S.dev=0;S.t=0;end`;
                                 window.location.href = intentUrl;
                                 setTimeout(() => window.open(amapWebUrl, '_blank'), 2000);
                             } else if (device.isAndroid) {
-                                const amapAndroidUrl = `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=${encodeURIComponent('和坑太平宫')}&dev=0&t=0`;
+                                const amapAndroidUrl = `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=${encodeURIComponent('上和坑')}&dev=0&t=0`;
                                 window.location.href = amapAndroidUrl;
                                 setTimeout(() => window.open(amapWebUrl, '_blank'), 2000);
                             } else if (device.isIOS) {
-                                const amapIOSUrl = `iosamap://path?sourceApplication=applicationName&dlat=${lat}&dlon=${lng}&dname=${encodeURIComponent('和坑太平宫')}&dev=0&t=0`;
+                                const amapIOSUrl = `iosamap://path?sourceApplication=applicationName&dlat=${lat}&dlon=${lng}&dname=${encodeURIComponent('上和坑')}&dev=0&t=0`;
                                 window.location.href = amapIOSUrl;
                                 setTimeout(() => window.open(amapWebUrl, '_blank'), 2000);
                             }
@@ -658,7 +657,7 @@
                 const lng = 117.555257;
                 document.getElementById('taipinggong-map').innerHTML = `
                     <img src="https://restapi.amap.com/v3/staticmap?location=${lng},${lat}&zoom=17&size=800*500&markers=mid,,A:${lng},${lat}&key=9f764a879b3650b035142ae657e0ac46" 
-                         alt="和坑太平宫位置" 
+                         alt="上和坑位置" 
                          class="w-full h-full object-cover rounded-lg">
                     <div class="mt-2 text-center text-sm text-gray-600">坐标：${lat}, ${lng}</div>
                 `;
@@ -706,3 +705,4 @@
     </script>
 </body>
 </html>
+
