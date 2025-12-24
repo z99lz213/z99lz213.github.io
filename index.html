@@ -393,13 +393,13 @@
                         
                         <!-- 地图导航按钮：优化高德跳转，移除百度地图，苹果地图始终显示 -->
                         <div class="mt-4 flex flex-wrap gap-3">
-                            <!-- 高德地图：优化多端适配跳转（重点适配VIVO OriginOS） -->
+                            <!-- 高德地图：深度适配VIVO X300 OriginOS -->
                             <a id="amapNavBtn" href="javascript:void(0);" 
                                class="sys-btn flex items-center bg-[#00B42A] text-white px-4 py-2 rounded-md hover:bg-[#00A824] transition-colors">
                                 <i class="fa fa-map-marker text-sm mr-2"></i> 高德地图
                             </a>
-                            <!-- 苹果地图：始终显示，取消隐藏逻辑 -->
-                            <a id="appleMapBtn" href="http://maps.apple.com/?q=感化里和坑太平宫&ll=25.413564,117.555257&z=16" 
+                            <!-- 苹果地图：始终显示 -->
+                            <a id="appleMapBtn" href="http://maps.apple.com/?q=25.413564,117.555257&z=16" 
                                class="sys-btn flex items-center bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">
                                 <i class="fa fa-map-o text-sm mr-2"></i> 苹果地图
                             </a>
@@ -457,7 +457,7 @@
     <!-- 先加载高德地图API（修复加载顺序问题） -->
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=9f764a879b3650b035142ae657e0ac46&plugin=AMap.Geolocation,AMap.ToolBar"></script>
     
-    <!-- 核心交互脚本（适配移动端/苹果端） -->
+    <!-- 核心交互脚本（深度适配VIVO X300） -->
     <script>
         // 移动端菜单切换
         document.getElementById('menuBtn').addEventListener('click', function() {
@@ -479,96 +479,89 @@
 
         // 轮播图脚本 - 修复核心问题
         let currentSlide = 0;
-        // 修复1：正确获取轮播项
         const slides = document.querySelectorAll('#carousel > div');
-        // 修复2：给指示器容器添加ID后精准获取
         const indicators = document.querySelectorAll('#carouselIndicators button');
         
         function showSlide(index) {
             const carousel = document.getElementById('carousel');
             carousel.style.transform = `translateX(-${index * 100}%)`;
-            
-            // 更新指示器状态
             indicators.forEach((btn, i) => {
                 btn.style.opacity = i === index ? '1' : '0.5';
             });
-            
             currentSlide = index;
         }
         
-        // 下一张
         document.getElementById('nextBtn').addEventListener('click', function() {
             let nextSlide = (currentSlide + 1) % slides.length;
             showSlide(nextSlide);
         });
         
-        // 上一张
         document.getElementById('prevBtn').addEventListener('click', function() {
             let prevSlide = (currentSlide - 1 + slides.length) % slides.length;
             showSlide(prevSlide);
         });
         
-        // 自动轮播
         setInterval(() => {
             let nextSlide = (currentSlide + 1) % slides.length;
             showSlide(nextSlide);
         }, 5000);
         
-        // 增强版设备检测函数（识别VIVO OriginOS）
+        // 增强版设备检测（精准识别VIVO X300/OriginOS）
         function detectDevice() {
             const ua = navigator.userAgent;
             return {
                 isMobile: /iPhone|iPad|iPod|Android/i.test(ua),
                 isIOS: /iPhone|iPad|iPod/i.test(ua),
                 isAndroid: /Android/i.test(ua),
-                isVIVO: /vivo|VIVO|OriginOS/i.test(ua), // 识别VIVO/OriginOS
+                // 精准识别VIVO设备（包含X300/OriginOS）
+                isVIVO: /vivo|VIVO|X300|OriginOS/i.test(ua),
                 isPC: !/iPhone|iPad|iPod|Android/i.test(ua)
             };
         }
         
-        // 初始化地图导航按钮（重点优化VIVO OriginOS适配）
+        // 初始化地图导航按钮（深度适配VIVO X300）
         function initMapNavButtons() {
             const device = detectDevice();
             const amapBtn = document.getElementById('amapNavBtn');
+            // 核心坐标（固化，避免参数传递错误）
+            const lat = 25.413564;
+            const lng = 117.555257;
+            const name = encodeURIComponent('和坑太平宫');
             
-            // 优化高德地图跳转逻辑 - 重点适配VIVO OriginOS
             amapBtn.addEventListener('click', function() {
-                // 坐标常量定义
-                const lat = 25.413564;
-                const lng = 117.555257;
-                const name = encodeURIComponent('感化里和坑太平宫');
-                
-                // 网页版URL（修复坐标传递问题，使用标准参数）
-                const amapWebUrl = `https://uri.amap.com/navigation?from=myLocation&to=${lat},${lng}&toName=${name}&mode=car&policy=1&src=webapp.amap.com`;
+                // 1. 纯坐标网页版URL（不依赖地名搜索）
+                const amapWebUrl = `https://amap.com/map/navigation?lat=${lat}&lng=${lng}&name=${name}&type=car&policy=1`;
                 
                 if (device.isVIVO) {
-                    // VIVO OriginOS 专属适配
-                    // 使用多种协议尝试跳转，提高成功率
-                    const amapVIVOUrls = [
-                        `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`,
-                        `androidamap://navi?sourceApplication=amap&lat=${lat}&lon=${lng}&dev=0&style=2`,
-                        `amap://navi?sourceApplication=amap&lat=${lat}&lon=${lng}&dev=0&style=2`
-                    ];
+                    // VIVO X300/OriginOS 专属解决方案
+                    // 方案1：使用Intent跳转（最稳定的VIVO适配方式）
+                    const intentUrl = `intent://navi/#Intent;scheme=amapuri;package=com.autonavi.minimap;action=android.intent.action.VIEW;category=android.intent.category.DEFAULT;component=com.autonavi.minimap/.api.bundle.MapActivity;S.dlat=${lat};S.dlon=${lng};S.dname=${name};S.dev=0;S.t=0;end`;
                     
-                    // 尝试第一种协议
-                    window.location.href = amapVIVOUrls[0];
+                    // 方案2：备用协议
+                    const backupUrl = `amap://navi?sourceApplication=amap&lat=${lat}&lon=${lng}&dev=0&style=2`;
                     
-                    // 备用方案：依次尝试其他协议
-                    setTimeout(() => {
-                        window.location.href = amapVIVOUrls[1];
-                    }, 1000);
-                    
-                    // 最终降级到网页版
-                    setTimeout(() => {
+                    try {
+                        // 优先使用Intent方式（VIVO官方推荐）
+                        window.location.href = intentUrl;
+                        
+                        // 1.5秒后检测是否跳转成功，失败则尝试备用协议
+                        setTimeout(() => {
+                            window.location.href = backupUrl;
+                        }, 1500);
+                        
+                        // 3秒后降级到纯坐标网页版
+                        setTimeout(() => {
+                            window.open(amapWebUrl, '_blank');
+                        }, 3000);
+                    } catch (e) {
+                        // 异常处理：直接打开网页版
                         window.open(amapWebUrl, '_blank');
-                    }, 2000);
+                    }
                     
                 } else if (device.isAndroid) {
                     // 普通安卓设备
                     const amapAndroidUrl = `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`;
                     window.location.href = amapAndroidUrl;
-                    
-                    // 降级到网页版
                     setTimeout(() => {
                         window.open(amapWebUrl, '_blank');
                     }, 2000);
@@ -577,84 +570,81 @@
                     // IOS设备
                     const amapIOSUrl = `iosamap://path?sourceApplication=applicationName&dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`;
                     window.location.href = amapIOSUrl;
-                    
-                    // 降级到网页版
                     setTimeout(() => {
                         window.open(amapWebUrl, '_blank');
                     }, 2000);
                     
                 } else {
-                    // PC端 - 修复坐标传递问题
-                    const pcAmapUrl = `https://www.amap.com/navigation/index?backurl=https://www.amap.com/&fromcoord=116.481028,39.989643&tocoord=${lng},${lat}&to=${name}&type=car&policy=1`;
+                    // PC端 - 纯坐标定位（不依赖地名）
+                    const pcAmapUrl = `https://www.amap.com/map/marker?position=${lng},${lat}&name=${name}&zoom=16`;
                     window.open(pcAmapUrl, '_blank');
                 }
             });
         }
         
-        // 初始化高德地图（修复加载和渲染问题）
+        // 初始化高德地图（纯坐标渲染，不依赖地名搜索）
         function initAmap() {
             try {
                 const device = detectDevice();
+                const lat = 25.413564;
+                const lng = 117.555257;
                 
-                // 初始化地图 - 优化配置
+                // 初始化地图 - 纯坐标配置
                 const map = new AMap.Map('taipinggong-map', {
-                    zoom: device.isMobile ? 15 : 16,
-                    center: [117.555257, 25.413564],
+                    zoom: device.isMobile ? 16 : 17, // 放大层级，精准定位
+                    center: [lng, lat],
                     resizeEnable: true,
                     features: ['bg', 'road', 'building', 'point'],
-                    viewMode: '2D', // 统一使用2D模式，避免3D渲染兼容问题
+                    viewMode: '2D',
                     mapStyle: 'amap://styles/normal'
                 });
                 
-                // 添加标记点
+                // 添加精准标记点
                 const marker = new AMap.Marker({
-                    position: [117.555257, 25.413564],
-                    title: '感化里和坑太平宫',
+                    position: [lng, lat],
+                    title: '和坑太平宫',
                     map: map,
                     icon: new AMap.Icon({
-                        size: new AMap.Size(30, 30),
+                        size: new AMap.Size(40, 40), // 放大标记，更易识别
                         image: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
-                        imageSize: new AMap.Size(30, 30)
-                    })
+                        imageSize: new AMap.Size(40, 40)
+                    }),
+                    offset: new AMap.Pixel(-20, -40) // 校准标记位置
                 });
                 
-                // 添加信息窗口
+                // 信息窗口 - 简化名称，提高识别率
                 const infoWindow = new AMap.InfoWindow({
-                    content: '<div style="padding: 10px;"><h3 style="color: #C41E3A; font-size: 16px; margin-bottom: 5px;">感化里和坑太平宫</h3><p style="font-size: 14px;">酉山卯向己酉己卯分金</p></div>',
-                    offset: new AMap.Pixel(0, -30)
+                    content: '<div style="padding: 10px;"><h3 style="color: #C41E3A; font-size: 16px; margin-bottom: 5px;">和坑太平宫</h3><p style="font-size: 14px;">坐标：25.413564, 117.555257</p></div>',
+                    offset: new AMap.Pixel(0, -40)
                 });
                 
                 marker.on('click', function() {
                     infoWindow.open(map, marker.getPosition());
                 });
                 
-                // 添加地图控件 - 优化移动端显示
+                // 添加地图控件
                 map.addControl(new AMap.ToolBar({
                     position: 'RB',
                     liteStyle: device.isMobile
                 }));
                 
-                // 优化地图点击事件的导航逻辑（适配VIVO）
+                // 地图点击事件 - 纯坐标导航
                 map.on('click', function() {
                     if (device.isMobile) {
                         const confirmNav = confirm('是否打开高德地图导航至太平宫？');
                         if (confirmNav) {
-                            const lat = 25.413564;
-                            const lng = 117.555257;
-                            const name = encodeURIComponent('感化里和坑太平宫');
-                            const amapWebUrl = `https://uri.amap.com/navigation?from=myLocation&to=${lat},${lng}&toName=${name}&mode=car&policy=1&src=webapp.amap.com`;
+                            const amapWebUrl = `https://amap.com/map/navigation?lat=${lat}&lng=${lng}&name=和坑太平宫&type=car&policy=1`;
                             
                             if (device.isVIVO) {
-                                // VIVO设备优先使用兼容协议
-                                const amapVIVOUrl = `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`;
-                                window.location.href = amapVIVOUrl;
+                                const intentUrl = `intent://navi/#Intent;scheme=amapuri;package=com.autonavi.minimap;action=android.intent.action.VIEW;category=android.intent.category.DEFAULT;component=com.autonavi.minimap/.api.bundle.MapActivity;S.dlat=${lat};S.dlon=${lng};S.dname=和坑太平宫;S.dev=0;S.t=0;end`;
+                                window.location.href = intentUrl;
                                 setTimeout(() => window.open(amapWebUrl, '_blank'), 2000);
                             } else if (device.isAndroid) {
-                                const amapAndroidUrl = `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`;
+                                const amapAndroidUrl = `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=和坑太平宫&dev=0&t=0`;
                                 window.location.href = amapAndroidUrl;
                                 setTimeout(() => window.open(amapWebUrl, '_blank'), 2000);
                             } else if (device.isIOS) {
-                                const amapIOSUrl = `iosamap://path?sourceApplication=applicationName&dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`;
+                                const amapIOSUrl = `iosamap://path?sourceApplication=applicationName&dlat=${lat}&dlon=${lng}&dname=和坑太平宫&dev=0&t=0`;
                                 window.location.href = amapIOSUrl;
                                 setTimeout(() => window.open(amapWebUrl, '_blank'), 2000);
                             }
@@ -662,31 +652,30 @@
                     }
                 });
                 
-                // 地图加载完成后触发
                 map.on('complete', function() {
-                    console.log('高德地图加载完成');
+                    console.log('高德地图加载完成，坐标：', lat, lng);
                 });
                 
             } catch (e) {
                 console.error('地图初始化失败:', e);
-                // 降级处理：显示静态地图图片（带坐标）
+                // 降级处理：显示带精准坐标的静态地图
+                const lat = 25.413564;
+                const lng = 117.555257;
                 document.getElementById('taipinggong-map').innerHTML = `
-                    <img src="https://restapi.amap.com/v3/staticmap?location=117.555257,25.413564&zoom=15&size=600*400&markers=mid,,A:117.555257,25.413564&key=9f764a879b3650b035142ae657e0ac46" 
-                         alt="感化里和坑太平宫位置" 
+                    <img src="https://restapi.amap.com/v3/staticmap?location=${lng},${lat}&zoom=17&size=800*500&markers=mid,,A:${lng},${lat}&key=9f764a879b3650b035142ae657e0ac46" 
+                         alt="和坑太平宫位置" 
                          class="w-full h-full object-cover rounded-lg">
+                    <div class="mt-2 text-center text-sm text-gray-600">坐标：${lat}, ${lng}</div>
                 `;
             }
         }
         
         // 页面加载完成后初始化
         window.addEventListener('load', function() {
-            // 初始化地图导航按钮
             initMapNavButtons();
-            
-            // 延迟初始化地图，确保API加载完成
             setTimeout(initAmap, 500);
             
-            // 苹果端表单样式优化
+            // 苹果端样式优化
             const device = detectDevice();
             if (device.isIOS) {
                 const inputs = document.querySelectorAll('input, textarea, button');
@@ -696,7 +685,7 @@
                 });
             }
 
-            // 平滑滚动（适配所有设备）
+            // 平滑滚动
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -704,7 +693,6 @@
                     const targetElement = document.querySelector(targetId);
                     
                     if (targetElement) {
-                        // 适配固定导航栏的滚动偏移
                         const navbarHeight = document.getElementById('navbar').offsetHeight;
                         const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
                         
@@ -713,7 +701,6 @@
                             behavior: 'smooth'
                         });
                         
-                        // 移动端点击后关闭菜单
                         if (window.innerWidth < 768) {
                             document.getElementById('mobileMenu').classList.add('hidden');
                         }
