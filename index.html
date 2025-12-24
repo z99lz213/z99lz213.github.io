@@ -139,10 +139,8 @@
             <!-- 桌面端导航 -->
             <nav class="hidden md:flex items-center space-x-8">
                 <a href="#home" class="text-dark hover:text-primary transition-colors font-medium">首页</a>
-                <a href="#overview" class="text-dark hover:text-primary transition-colors font-medium">庆典概况</a>
                 <a href="#process" class="text-dark hover:text-primary transition-colors font-medium">活动流程</a>
-                <a href="#history" class="text-dark hover:text-primary transition-colors font-medium">太平宫沿革</a>
-                <a href="#donation" class="text-dark hover:text-primary transition-colors font-medium">捐赠鸣谢</a>
+                <a href="#overview" class="text-dark hover:text-primary transition-colors font-medium">庆典概况</a>
                 <a href="#registration" class="text-dark hover:text-primary transition-colors font-medium">报名通道</a>
                 <!-- 立即报名按钮 - 适配不同系统的按钮样式 -->
                 <a href="#registration" class="sys-btn bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors">
@@ -160,10 +158,8 @@
         <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg absolute w-full">
             <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
                 <a href="#home" class="text-dark hover:text-primary transition-colors font-medium py-2 border-b border-gray-100">首页</a>
-                <a href="#overview" class="text-dark hover:text-primary transition-colors font-medium py-2 border-b border-gray-100">庆典概况</a>
                 <a href="#process" class="text-dark hover:text-primary transition-colors font-medium py-2 border-b border-gray-100">活动流程</a>
-                <a href="#history" class="text-dark hover:text-primary transition-colors font-medium py-2 border-b border-gray-100">太平宫沿革</a>
-                <a href="#donation" class="text-dark hover:text-primary transition-colors font-medium py-2 border-b border-gray-100">捐赠鸣谢</a>
+                <a href="#overview" class="text-dark hover:text-primary transition-colors font-medium py-2 border-b border-gray-100">庆典概况</a>
                 <a href="#registration" class="text-dark hover:text-primary transition-colors font-medium py-2 border-b border-gray-100">报名通道</a>
                 <!-- 移动端立即报名按钮 -->
                 <a href="#registration" class="sys-btn bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors w-full text-center">
@@ -221,34 +217,34 @@
             </div>
         </div>
 
-        <!-- 邀请函核心代码（已优化格式） -->
+        <!-- 邀请函核心代码（已优化格式，字体缩小） -->
         <div class="container mx-auto px-4 py-12 md:py-16">
             <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-                <!-- 取消标题空两格 -->
-                <p class="text-lg md:text-xl invitation-title" 
+                <!-- 取消标题空两格，字体缩小 -->
+                <p class="text-base md:text-lg invitation-title" 
                    style="font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif; color: #8B0000;">
                     尊敬的各位善信、嘉宾：
                 </p>
-                <!-- 正文段落空两格 -->
-                <p class="text-lg md:text-xl invitation-text" 
+                <!-- 正文段落空两格，字体缩小 -->
+                <p class="text-base md:text-lg invitation-text" 
                    style="font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif; color: #8B0000;">
                     感化里和坑冬内山脚，仙境实地今起威宇华庭。
                 </p>
-		<p class="text-lg md:text-xl invitation-text" 
+				<p class="text-base md:text-lg invitation-text" 
                    style="font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif; color: #8B0000;">
                     溪南和坑太平宫为共襄盛举，拟定于2025年12月29日（农历十一月初十），举行重建盛大落成庆典。届时将进行巡游活动及佛像入宫仪式，并有舞狮、乐队、歌舞等到场助兴。佛恩浩荡，活动期间太平宫膳食区将为所有来客提供免费美食。
                 </p>
 
-                <p class="text-lg md:text-xl invitation-text" 
+                <p class="text-base md:text-lg invitation-text" 
                    style="font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif; color: #8B0000;">
                     现诚邀广大善信、嘉宾莅临现场，共沐佛恩、同沾法喜。美丽太平宫期待与您温暖邂逅。
                 </p>
-                <p class="text-lg md:text-xl invitation-text" 
+                <p class="text-base md:text-lg invitation-text" 
                    style="font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif; color: #8B0000;">
                     敬祝吉祥如意、福慧双增。
                 </p>
                 
-                <div class="invitation落款 text-lg md:text-xl" 
+                <div class="invitation落款 text-base md:text-lg" 
                      style="font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif; color: #8B0000;">
                     和坑太平宫重建理事会<br>
                     二零二五年冬月
@@ -260,30 +256,110 @@
                 </p>
             </div>
         </div>
+    </section>
 
-        <!-- 快速入口：适配不同系统的响应式布局 -->
-        <div class="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <a href="#registration" class="bg-primary text-white p-8 rounded-lg shadow-md hover-scale flex flex-col items-center justify-center text-center">
-                <i class="fa fa-check-circle text-4xl mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">一键报名</h3>
-                <p>锁定庆典席位，共赴盛事</p>
-            </a>
-            <button id="processBtn" class="sys-btn bg-secondary text-dark p-8 rounded-lg shadow-md hover-scale flex flex-col items-center justify-center text-center">
-                <i class="fa fa-calendar-check-o text-4xl mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">流程速览</h3>
-                <p>了解庆典完整环节</p>
-            </button>
-            <!-- 导航地图按钮：适配不同系统的跳转协议 -->
-            <a href="https://amap.com/navigation?from=我的位置&to=25.413564,117.555257&name=感化里和坑太平宫&type=0" 
-               class="bg-accent text-white p-8 rounded-lg shadow-md hover-scale flex flex-col items-center justify-center text-center">
-                <i class="fa fa-map-marker text-4xl mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">导航地图</h3>
-                <p>一键导航至活动现场</p>
-            </a>
+    <!-- 活动流程：适配不同系统的表格渲染（仅保留时间、活动内容两列） -->
+    <section id="process" class="py-16 bg-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">活动流程</h2>
+                <div class="w-20 h-1 bg-accent mx-auto"></div>
+                <p class="mt-4 text-lg">详细了解庆典各环节安排，共赴圆满盛会</p>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full bg-white rounded-lg shadow-lg overflow-hidden">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th class="py-4 px-6 text-left text-lg">时间</th>
+                            <th class="py-4 px-6 text-left text-lg">活动内容</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-light/50 transition-colors">
+                            <td class="py-4 px-6 font-medium">6:40 ~ 7:00</td>
+                            <td class="py-4 px-6 font-medium text-primary">迎接众佛</td>
+                        </tr>
+                        <tr class="hover:bg-light/50 transition-colors">
+                            <td class="py-4 px-6 font-medium">7:00 ~ 8:20</td>
+                            <td class="py-4 px-6 font-medium text-primary">众佛巡游</td>
+                        </tr>
+                        <tr class="hover:bg-light/50 transition-colors">
+                            <td class="py-4 px-6 font-medium">8:20 ~ 8:50</td>
+                            <td class="py-4 px-6 font-medium text-primary">众佛入宫</td>
+                        </tr>
+                        <tr class="hover:bg-light/50 transition-colors">
+                            <td class="py-4 px-6 font-medium">8:50 ~ 9:00</td>
+                            <td class="py-4 px-6 font-medium text-primary">揭牌仪式</td>
+                        </tr>
+                        <tr class="hover:bg-light/50 transition-colors">
+                            <td class="py-4 px-6 font-medium">9:00 ~ 9:10</td>
+                            <td class="py-4 px-6 font-medium text-primary">升国旗</td>
+                        </tr>
+                        <tr class="hover:bg-light/50 transition-colors">
+                            <td class="py-4 px-6 font-medium">9:10 ~ 9:40</td>
+                            <td class="py-4 px-6 font-medium text-primary">舞狮表演</td>
+                        </tr>
+                        <tr class="hover:bg-light/50 transition-colors">
+                            <td class="py-4 px-6 font-medium">9:40 ~ 10:00</td>
+                            <td class="py-4 px-6 font-medium text-primary">锣鼓队</td>
+                        </tr>
+                        <tr class="hover:bg-light/50 transition-colors">
+                            <td class="py-4 px-6 font-medium">10:00 ~ 11:00</td>
+                            <td class="py-4 px-6 font-medium text-primary">歌舞1</td>
+                        </tr>
+                        <tr class="hover:bg-light/50 transition-colors">
+                            <td class="py-4 px-6 font-medium">11:00 ~ 13:00</td>
+                            <td class="py-4 px-6 font-medium text-primary">午饭</td>
+                        </tr>
+                        <tr class="hover:bg-light/50 transition-colors bg-secondary/20">
+                            <td class="py-4 px-6 font-medium">13:00 ~ 15:00</td>
+                            <td class="py-4 px-6 font-medium text-primary">歌舞2</td>
+                        </tr>
+                        <tr class="hover:bg-light/50 transition-colors bg-secondary/20">
+                            <td class="py-4 px-6 font-medium">15:00 ~ 16:30</td>
+                            <td class="py-4 px-6 font-medium text-primary">礼品发放</td>
+                        </tr>
+                        <tr class="hover:bg-light/50 transition-colors bg-secondary/20">
+                            <td class="py-4 px-6 font-medium">16:30 ~ 17:00</td>
+                            <td class="py-4 px-6 font-medium text-primary">礼佛结束</td>
+                        </tr>
+                        <tr class="hover:bg-light/50 transition-colors">
+                            <td class="py-4 px-6 font-medium">17:00以后</td>
+                            <td class="py-4 px-6 font-medium text-primary">歌舞3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 温馨提示 -->
+            <div class="mt-12 bg-white p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-primary mb-6 flex items-center">
+                    <i class="fa fa-exclamation-circle mr-2"></i>温馨提示
+                </h3>
+                <ul class="space-y-3 text-lg">
+                    <li class="flex items-start">
+                        <i class="fa fa-check text-accent mt-1 mr-3"></i>
+                        <span>活动期间人员较多，请遵守现场秩序，听从工作人员指引，文明参与各环节</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-check text-accent mt-1 mr-3"></i>
+                        <span>祈福专区设有香案，可按需参与祈福，请勿擅自触碰殿内文物及佛像</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-check text-accent mt-1 mr-3"></i>
+                        <span>现场提供饮用水、急救物资等便民服务，如有需求可联系工作人员</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa fa-check text-accent mt-1 mr-3"></i>
+                        <span>建议提前规划出行路线，预留充足时间到达现场，避免拥堵</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </section>
 
-    <!-- 庆典概况：适配不同系统的布局与地图渲染 -->
+    <!-- 庆典概况：适配不同系统的布局与地图渲染（移除四个意义模块） -->
     <section id="overview" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
@@ -317,13 +393,14 @@
                         <!-- 高德地图展示容器：适配不同系统的地图渲染 -->
                         <div id="taipinggong-map" class="w-full h-64 rounded-lg border border-gray-200 my-4"></div>
                         
-                        <!-- 地图导航按钮：适配不同系统的跳转 -->
+                        <!-- 地图导航按钮：适配不同系统的跳转（优化高德地图坐标传递） -->
                         <div class="mt-4 flex flex-wrap gap-3">
                             <a href="https://map.baidu.com/marker?location=25.413564,117.555257&title=感化里和坑太平宫&content=感化里和坑太平宫（酉山卯向己酉己卯分金）&output=html" 
                                target="_blank" class="sys-btn flex items-center bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors">
                                 <i class="fa fa-map text-sm mr-2"></i> 百度地图
                             </a>
-                            <a href="https://amap.com/navigation?from=我的位置&to=25.413564,117.555257&name=感化里和坑太平宫&type=0" 
+                            <!-- 优化高德地图移动端跳转，自动传入坐标 -->
+                            <a href="amapuri://route/plan/?dlat=25.413564&dlon=117.555257&dname=感化里和坑太平宫&dev=0&t=0" 
                                class="sys-btn flex items-center bg-[#00B42A] text-white px-4 py-2 rounded-md hover:bg-[#00A824] transition-colors">
                                 <i class="fa fa-map-marker text-sm mr-2"></i> 高德地图
                             </a>
@@ -344,246 +421,6 @@
                             <i class="fa fa-handshake-o text-primary mr-2"></i>支持单位
                         </h3>
                         <p class="text-lg">华懋（厦门）特种材料有限公司、各界捐资单位及热心人士</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 庆典意义：适配不同系统的响应式布局 -->
-            <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="bg-light p-6 rounded-lg shadow-md hover-scale">
-                    <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                        <i class="fa fa-history text-2xl text-primary"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-center">传承民俗</h3>
-                    <p class="text-center">延续太平宫承载的传统民俗文化，弘扬平心善德理念</p>
-                </div>
-                <div class="bg-light p-6 rounded-lg shadow-md hover-scale">
-                    <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                        <i class="fa fa-heart text-2xl text-primary"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-center">感恩回馈</h3>
-                    <p class="text-center">向为重建出资出力的乡贤、信众及各界人士致以敬意</p>
-                </div>
-                <div class="bg-light p-6 rounded-lg shadow-md hover-scale">
-                    <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                        <!-- 补充缺失的祈福图标 -->
-                        <i class="fa fa-gift text-2xl text-primary"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-center">祈福纳祥</h3>
-                    <p class="text-center">为众生安康、乡土繁荣、宝殿香火永续举行庄严祈福仪式</p>
-                </div>
-                <div class="bg-light p-6 rounded-lg shadow-md hover-scale">
-                    <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                        <i class="fa fa-users text-2xl text-primary"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-center">凝聚乡情</h3>
-                    <p class="text-center">搭建乡贤挚友欢聚平台，共叙桑梓情，共话发展计</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 活动流程：适配不同系统的表格渲染 -->
-    <section id="process" class="py-16 bg-light">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">活动流程</h2>
-                <div class="w-20 h-1 bg-accent mx-auto"></div>
-                <p class="mt-4 text-lg">详细了解庆典各环节安排，共赴圆满盛会</p>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full bg-white rounded-lg shadow-lg overflow-hidden">
-                    <thead class="bg-primary text-white">
-                        <tr>
-                            <th class="py-4 px-6 text-left text-lg">时间</th>
-                            <th class="py-4 px-6 text-left text-lg">活动内容</th>
-                            <th class="py-4 px-6 text-left text-lg">时长预算</th>
-                            <th class="py-4 px-6 text-left text-lg">负责人</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr class="hover:bg-light/50 transition-colors">
-                            <td class="py-4 px-6 font-medium">6:40 ~ 7:00</td>
-                            <td class="py-4 px-6 font-medium text-primary">迎接众佛</td>
-                            <td class="py-4 px-6">20</td>
-                            <td class="py-4 px-6"></td>
-                        </tr>
-                        <tr class="hover:bg-light/50 transition-colors">
-                            <td class="py-4 px-6 font-medium">7:00 ~ 8:20</td>
-                            <td class="py-4 px-6 font-medium text-primary">众佛巡游</td>
-                            <td class="py-4 px-6">80</td>
-                            <td class="py-4 px-6"></td>
-                        </tr>
-                        <tr class="hover:bg-light/50 transition-colors">
-                            <td class="py-4 px-6 font-medium">8:20 ~ 8:50</td>
-                            <td class="py-4 px-6 font-medium text-primary">众佛入宫</td>
-                            <td class="py-4 px-6">30</td>
-                            <td class="py-4 px-6"></td>
-                        </tr>
-                        <tr class="hover:bg-light/50 transition-colors">
-                            <td class="py-4 px-6 font-medium">8:50 ~ 9:00</td>
-                            <td class="py-4 px-6 font-medium text-primary">揭牌仪式</td>
-                            <td class="py-4 px-6">10</td>
-                            <td class="py-4 px-6"></td>
-                        </tr>
-                        <tr class="hover:bg-light/50 transition-colors">
-                            <td class="py-4 px-6 font-medium">9:00 ~ 9:10</td>
-                            <td class="py-4 px-6 font-medium text-primary">升国旗</td>
-                            <td class="py-4 px-6">10</td>
-                            <td class="py-4 px-6"></td>
-                        </tr>
-                        <tr class="hover:bg-light/50 transition-colors">
-                            <td class="py-4 px-6 font-medium">9:10 ~ 9:40</td>
-                            <td class="py-4 px-6 font-medium text-primary">舞狮表演</td>
-                            <td class="py-4 px-6">30</td>
-                            <td class="py-4 px-6"></td>
-                        </tr>
-                        <tr class="hover:bg-light/50 transition-colors">
-                            <td class="py-4 px-6 font-medium">9:40 ~ 10:00</td>
-                            <td class="py-4 px-6 font-medium text-primary">锣鼓队</td>
-                            <td class="py-4 px-6">20</td>
-                            <td class="py-4 px-6"></td>
-                        </tr>
-                        <tr class="hover:bg-light/50 transition-colors">
-                            <td class="py-4 px-6 font-medium">10:00 ~ 11:00</td>
-                            <td class="py-4 px-6 font-medium text-primary">歌舞1</td>
-                            <td class="py-4 px-6">60</td>
-                            <td class="py-4 px-6">HMT</td>
-                        </tr>
-                        <tr class="hover:bg-light/50 transition-colors">
-                            <td class="py-4 px-6 font-medium">11:00 ~ 13:00</td>
-                            <td class="py-4 px-6 font-medium text-primary">午饭</td>
-                            <td class="py-4 px-6">120</td>
-                            <td class="py-4 px-6"></td>
-                        </tr>
-                        <tr class="hover:bg-light/50 transition-colors bg-secondary/20">
-                            <td class="py-4 px-6 font-medium">13:00 ~ 15:00</td>
-                            <td class="py-4 px-6 font-medium text-primary">歌舞2</td>
-                            <td class="py-4 px-6">120</td>
-                            <td class="py-4 px-6"></td>
-                        </tr>
-                        <tr class="hover:bg-light/50 transition-colors bg-secondary/20">
-                            <td class="py-4 px-6 font-medium">15:00 ~ 16:30</td>
-                            <td class="py-4 px-6 font-medium text-primary">礼品发放</td>
-                            <td class="py-4 px-6">90</td>
-                            <td class="py-4 px-6"></td>
-                        </tr>
-                        <tr class="hover:bg-light/50 transition-colors bg-secondary/20">
-                            <td class="py-4 px-6 font-medium">16:30 ~ 17:00</td>
-                            <td class="py-4 px-6 font-medium text-primary">礼佛结束</td>
-                            <td class="py-4 px-6">30</td>
-                            <td class="py-4 px-6"></td>
-                        </tr>
-                        <tr class="hover:bg-light/50 transition-colors">
-                            <td class="py-4 px-6 font-medium">17:00以后</td>
-                            <td class="py-4 px-6 font-medium text-primary">歌舞3</td>
-                            <td class="py-4 px-6"></td>
-                            <td class="py-4 px-6"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- 温馨提示 -->
-            <div class="mt-12 bg-white p-8 rounded-lg shadow-md">
-                <h3 class="text-2xl font-bold text-primary mb-6 flex items-center">
-                    <i class="fa fa-exclamation-circle mr-2"></i>温馨提示
-                </h3>
-                <ul class="space-y-3 text-lg">
-                    <li class="flex items-start">
-                        <i class="fa fa-check text-accent mt-1 mr-3"></i>
-                        <span>活动期间人员较多，请遵守现场秩序，听从工作人员指引，文明参与各环节</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fa fa-check text-accent mt-1 mr-3"></i>
-                        <span>祈福专区设有香案，可按需参与祈福，请勿擅自触碰殿内文物及佛像</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fa fa-check text-accent mt-1 mr-3"></i>
-                        <span>现场提供饮用水、急救物资等便民服务，如有需求可联系工作人员</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fa fa-check text-accent mt-1 mr-3"></i>
-                        <span>建议提前规划出行路线，预留充足时间到达现场，避免拥堵</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- 太平宫沿革：适配不同系统的布局 -->
-    <section id="history" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">太平宫沿革</h2>
-                <div class="w-20 h-1 bg-accent mx-auto"></div>
-                <p class="mt-4 text-lg">追溯古宫历史，感受文脉传承</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                <div>
-                    <div class="space-y-8">
-                        <div class="bg-light p-6 rounded-lg shadow-md hover-scale">
-                            <h3 class="text-xl font-bold text-primary mb-3">历史渊源</h3>
-                            <p class="text-lg leading-relaxed">
-                                太平宫屹立于感化里和坑冬龙脉之下，坐落酉山卯向己酉己卯分金，风水佳境，文脉深厚。庙内供奉张公法主、清水祖师、三代祖师、五谷真仙、玉封朱代侯王、虎马元帅六尊佛像，历经沧桑却始终香火不绝，承载着世代和坑人永恒之念想与心灵所托。
-                            </p>
-                        </div>
-                        <div class="bg-light p-6 rounded-lg shadow-md hover-scale">
-                            <h3 class="text-xl font-bold text-primary mb-3">始建与修缮</h3>
-                            <p class="text-lg leading-relaxed">
-                                太平宫始建年代不详。道光二十六年丙午冬岁，进士儒林郎陈梦花（字秀茂）捐佛银叁大员、粟叁箩，助力庙宇日常运营。公元二〇〇四年岁次甲申五月，众信士捐资近贰万元，对太平宫进行结构保护性修缮，延续古宫文脉。
-                            </p>
-                        </div>
-                        <div class="bg-light p-6 rounded-lg shadow-md hover-scale">
-                            <h3 class="text-xl font-bold text-primary mb-3">重建历程</h3>
-                            <p class="text-lg leading-relaxed">
-                                二〇二五年岁次乙巳春月，乡贤张初全（华懋（厦门）特种材料有限公司董事长）牵头，启动重建规划与立项。二〇二五年四月二十八动土奠基，七月十三上梁仪式，十一月初十佛像入宫，历时壹年，耗资近贰百万元，新宫终得圆满落成。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="space-y-6">
-                    <div class="hover-scale">
-                        <img src="img/banner1.jpg" alt="太平宫历史影像" class="carousel-img w-full h-auto rounded-lg shadow-lg">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="hover-scale">
-                            <img src="img/banner2.jpg" alt="重建动土仪式" class="carousel-img w-full h-auto rounded-lg shadow-md">
-                        </div>
-                        <div class="hover-scale">
-                            <img src="img/banner4.jpg" alt="上梁仪式" class="carousel-img w-full h-auto rounded-lg shadow-md">
-                        </div>
-                    </div>
-                    <div class="bg-primary/10 p-4 rounded-lg text-center">
-                        <p class="text-lg font-medium">新宫亮点：保留传统规制，融合现代便民设计，传承与创新兼具</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 捐赠鸣谢：适配不同系统的布局 -->
-    <section id="donation" class="py-16 bg-light">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">捐赠鸣谢</h2>
-                <div class="w-20 h-1 bg-accent mx-auto"></div>
-                <p class="mt-4 text-lg">感恩每一份善举，共筑古宫新生</p>
-            </div>
-
-            <!-- 领衔捐赠 -->
-            <div class="bg-white p-8 rounded-lg shadow-lg mb-12 hover-scale">
-                <h3 class="text-2xl font-bold text-primary mb-6 text-center">领衔捐赠</h3>
-                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
-                    <div class="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center">
-                        <img src="img/zhang.jpg" alt="张初全先生" class="carousel-img w-full h-full object-cover rounded-full">
-                    </div>
-                    <div class="text-center md:text-left">
-                        <h4 class="text-xl font-bold">张初全 先生</h4>
-                        <p class="text-lg text-gray-600">华懋（厦门）特种材料有限公司董事长</p>
-                        <p class="mt-2 text-primary font-medium">资金引领与善念感召</p>
                     </div>
                 </div>
             </div>
@@ -613,26 +450,21 @@
         </div>
     </section>
 
-    <!-- 页脚：适配不同系统的显示 -->
-    <footer class="bg-dark text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="border-t border-gray-700 pt-8 text-center">
-                <p>© 二〇二五年 和坑太平宫重建理事会 版权所有</p>
-            </div>
+    <!-- 底部版权信息 -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg mb-2">和坑太平宫重建理事会 版权所有</p>
+            <p class="text-sm opacity-80">地址：感化里和坑太平宫 | 联系电话：0596-XXXXXXX</p>
+            <p class="text-sm opacity-80 mt-2">© 2025 太平宫重建庆典 保留所有权利</p>
         </div>
     </footer>
-    
-    <!-- 补充缺失的JavaScript功能 -->
+
+    <!-- 核心交互脚本（适配移动端/苹果端） -->
     <script>
         // 移动端菜单切换
         document.getElementById('menuBtn').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobileMenu');
             mobileMenu.classList.toggle('hidden');
-        });
-
-        // 流程速览按钮跳转
-        document.getElementById('processBtn').addEventListener('click', function() {
-            document.getElementById('process').scrollIntoView({ behavior: 'smooth' });
         });
 
         // 导航栏滚动效果
@@ -647,65 +479,128 @@
             }
         });
 
-        // 轮播图自动播放
+        // 轮播图脚本
         let currentSlide = 0;
         const slides = document.querySelectorAll('#carousel > div');
-        const totalSlides = slides.length;
+        const indicators = document.querySelectorAll('#carousel + div button');
         
         function showSlide(index) {
             const carousel = document.getElementById('carousel');
             carousel.style.transform = `translateX(-${index * 100}%)`;
             
             // 更新指示器状态
-            const indicators = document.querySelectorAll('#carousel ~ div button');
-            indicators.forEach((indicator, i) => {
-                indicator.style.opacity = i === index ? '1' : '0.5';
+            indicators.forEach((btn, i) => {
+                btn.style.opacity = i === index ? '1' : '0.5';
             });
+            
+            currentSlide = index;
         }
         
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            showSlide(currentSlide);
-        }
+        // 下一张
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            let nextSlide = (currentSlide + 1) % slides.length;
+            showSlide(nextSlide);
+        });
         
-        // 手动切换轮播
-        document.getElementById('nextBtn').addEventListener('click', nextSlide);
+        // 上一张
         document.getElementById('prevBtn').addEventListener('click', function() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            showSlide(currentSlide);
+            let prevSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(prevSlide);
         });
         
         // 自动轮播
-        setInterval(nextSlide, 5000);
-
-        // 初始化高德地图
+        setInterval(() => {
+            let nextSlide = (currentSlide + 1) % slides.length;
+            showSlide(nextSlide);
+        }, 5000);
+        
+        // 初始化高德地图（适配移动端/苹果端）
         window.onload = function() {
-            if (typeof AMap !== 'undefined') {
-                const map = new AMap.Map('taipinggong-map', {
-                    zoom: 16,
-                    center: [117.555257, 25.413564],
-                    resizeEnable: true
-                });
-                
-                // 添加标记
-                const marker = new AMap.Marker({
-                    position: [117.555257, 25.413564],
-                    title: '感化里和坑太平宫'
-                });
-                map.add(marker);
-                
-                // 添加信息窗口
-                const infoWindow = new AMap.InfoWindow({
-                    content: '<div style="padding: 10px;"><h3>感化里和坑太平宫</h3><p>酉山卯向己酉己卯分金</p></div>'
-                });
-                marker.on('click', function() {
-                    infoWindow.open(map, marker.getPosition());
-                });
-                
-                // 添加控件
+            // 检测设备类型，优化地图加载
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            // 初始化地图
+            const map = new AMap.Map('taipinggong-map', {
+                zoom: isMobile ? 15 : 16, // 移动端缩放级别调整
+                center: [117.555257, 25.413564],
+                resizeEnable: true,
+                // 适配苹果端地图控件显示
+                features: ['bg', 'road', 'building', 'point'],
+                viewMode: isMobile ? '3D' : '2D'
+            });
+            
+            // 添加标记点
+            const marker = new AMap.Marker({
+                position: [117.555257, 25.413564],
+                title: '感化里和坑太平宫',
+                map: map
+            });
+            
+            // 添加信息窗口
+            const infoWindow = new AMap.InfoWindow({
+                content: '<div style="padding: 10px;"><h3 style="color: #C41E3A; font-size: 16px; margin-bottom: 5px;">感化里和坑太平宫</h3><p style="font-size: 14px;">酉山卯向己酉己卯分金</p></div>',
+                offset: new AMap.Pixel(0, -30)
+            });
+            
+            marker.on('click', function() {
+                infoWindow.open(map, marker.getPosition());
+            });
+            
+            // 添加地图控件（适配移动端）
+            if (isMobile) {
+                map.addControl(new AMap.ToolBar({
+                    position: 'RB',
+                    liteStyle: true
+                }));
+            } else {
                 map.addControl(new AMap.ToolBar());
             }
+            
+            // 地图点击导航事件（适配移动端）
+            map.on('click', function() {
+                if (isMobile) {
+                    const confirmNav = confirm('是否打开高德地图导航至太平宫？');
+                    if (confirmNav) {
+                        window.location.href = 'amapuri://route/plan/?dlat=25.413564&dlon=117.555257&dname=感化里和坑太平宫&dev=0&t=0';
+                    }
+                }
+            });
         };
+
+        // 苹果端表单样式优化
+        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            const inputs = document.querySelectorAll('input, textarea, button');
+            inputs.forEach(el => {
+                el.style.appearance = 'none';
+                el.style.borderRadius = '6px';
+            });
+        }
+
+        // 平滑滚动（适配所有设备）
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // 适配固定导航栏的滚动偏移
+                    const navbarHeight = document.getElementById('navbar').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 移动端点击后关闭菜单
+                    if (window.innerWidth < 768) {
+                        document.getElementById('mobileMenu').classList.add('hidden');
+                    }
+                }
+            });
+        });
+    };
     </script>
 </body>
 </html>
