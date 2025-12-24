@@ -386,15 +386,15 @@
                         <!-- 高德地图展示容器：适配不同系统的地图渲染 -->
                         <div id="taipinggong-map" class="w-full h-64 rounded-lg border border-gray-200 my-4"></div>
                         
-                        <!-- 地图导航按钮：优化高德跳转，移除百度地图，苹果地图始终显示 -->
+                        <!-- 地图导航按钮：修复苹果地图跳转问题 -->
                         <div class="mt-4 flex flex-wrap gap-3">
                             <!-- 高德地图：深度适配VIVO X300 OriginOS -->
                             <a id="amapNavBtn" href="javascript:void(0);" 
                                class="sys-btn flex items-center bg-[#00B42A] text-white px-4 py-2 rounded-md hover:bg-[#00A824] transition-colors">
                                 <i class="fa fa-map-marker text-sm mr-2"></i> 高德地图
                             </a>
-                            <!-- 苹果地图：始终显示 -->
-                            <a id="appleMapBtn" href="http://maps.apple.com/?q=25.413564,117.555257&z=16" 
+                            <!-- 苹果地图：修复跳转链接，使用标准格式 -->
+                            <a id="appleMapBtn" href="javascript:void(0);" 
                                class="sys-btn flex items-center bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">
                                 <i class="fa fa-map-o text-sm mr-2"></i> 苹果地图
                             </a>
@@ -417,8 +417,6 @@
         </div>
     </section>
 
-
-
     <!-- 底部版权信息 -->
     <footer class="bg-dark text-white py-8">
         <div class="container mx-auto px-4 text-center">
@@ -431,7 +429,7 @@
     <!-- 先加载高德地图API（修复加载顺序问题） -->
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=9f764a879b3650b035142ae657e0ac46&plugin=AMap.Geolocation,AMap.ToolBar"></script>
     
-    <!-- 核心交互脚本（深度适配VIVO X300） -->
+    <!-- 核心交互脚本（深度适配VIVO X300 + 修复苹果地图跳转） -->
     <script>
         // 移动端菜单切换
         document.getElementById('menuBtn').addEventListener('click', function() {
@@ -493,26 +491,28 @@
             };
         }
         
-        // 初始化地图导航按钮（深度适配VIVO X300）
+        // 初始化地图导航按钮（深度适配VIVO X300 + 修复苹果地图跳转）
         function initMapNavButtons() {
             const device = detectDevice();
             const amapBtn = document.getElementById('amapNavBtn');
+            const appleMapBtn = document.getElementById('appleMapBtn');
             // 核心坐标（固化，避免参数传递错误）
             const lat = 25.413564;
             const lng = 117.555257;
             const name = encodeURIComponent('和坑太平宫');
             
+            // 高德地图按钮点击事件
             amapBtn.addEventListener('click', function() {
-                // 1. 纯坐标网页版URL（不依赖地名搜索）
-                const amapWebUrl = `https://amap.com/map/navigation?lat=${lat}&lng=${lng}&name=${name}&type=car&policy=1`;
+                // 1. 纯坐标网页版URL（修复域名和参数格式）
+                const amapWebUrl = `https://www.amap.com/map/navigation?lat=${lat}&lng=${lng}&name=${name}&type=car&policy=1`;
                 
                 if (device.isVIVO) {
                     // VIVO X300/OriginOS 专属解决方案
-                    // 方案1：使用Intent跳转（最稳定的VIVO适配方式）
+                    // 方案1：使用Intent跳转（确保参数格式正确）
                     const intentUrl = `intent://navi/#Intent;scheme=amapuri;package=com.autonavi.minimap;action=android.intent.action.VIEW;category=android.intent.category.DEFAULT;component=com.autonavi.minimap/.api.bundle.MapActivity;S.dlat=${lat};S.dlon=${lng};S.dname=${name};S.dev=0;S.t=0;end`;
                     
-                    // 方案2：备用协议
-                    const backupUrl = `amap://navi?sourceApplication=amap&lat=${lat}&lon=${lng}&dev=0&style=2`;
+                    // 方案2：备用协议（修复参数名一致性）
+                    const backupUrl = `amap://navi?sourceApplication=amap&lat=${lat}&lng=${lng}&dev=0&style=2`;
                     
                     try {
                         // 优先使用Intent方式（VIVO官方推荐）
@@ -533,7 +533,7 @@
                     }
                     
                 } else if (device.isAndroid) {
-                    // 普通安卓设备
+                    // 普通安卓设备（确保参数格式正确）
                     const amapAndroidUrl = `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`;
                     window.location.href = amapAndroidUrl;
                     setTimeout(() => {
@@ -541,7 +541,7 @@
                     }, 2000);
                     
                 } else if (device.isIOS) {
-                    // IOS设备
+                    // IOS设备（确保参数格式正确）
                     const amapIOSUrl = `iosamap://path?sourceApplication=applicationName&dlat=${lat}&dlon=${lng}&dname=${name}&dev=0&t=0`;
                     window.location.href = amapIOSUrl;
                     setTimeout(() => {
@@ -552,6 +552,28 @@
                     // PC端 - 纯坐标定位（不依赖地名）
                     const pcAmapUrl = `https://www.amap.com/map/marker?position=${lng},${lat}&name=${name}&zoom=16`;
                     window.open(pcAmapUrl, '_blank');
+                }
+            });
+            
+            // 苹果地图按钮点击事件（修复核心）
+            appleMapBtn.addEventListener('click', function() {
+                // 苹果地图标准URL格式（确保正确的参数格式）
+                let appleMapUrl;
+                
+                if (device.isIOS) {
+                    // iOS设备：使用原生地图协议，确保参数格式正确
+                    appleMapUrl = `maps://?q=${name}&ll=${lat},${lng}&z=16&t=m`;
+                } else {
+                    // 非iOS设备：使用网页版苹果地图
+                    appleMapUrl = `https://maps.apple.com/?q=${name}&ll=${lat},${lng}&z=16&t=m`;
+                }
+                
+                // 尝试直接使用当前窗口跳转原生地图（iOS上更可靠）
+                if (device.isIOS) {
+                    window.location.href = appleMapUrl;
+                } else {
+                    // 非iOS设备使用新窗口
+                    window.open(appleMapUrl, '_blank');
                 }
             });
         }
@@ -607,18 +629,19 @@
                     if (device.isMobile) {
                         const confirmNav = confirm('是否打开高德地图导航至太平宫？');
                         if (confirmNav) {
-                            const amapWebUrl = `https://amap.com/map/navigation?lat=${lat}&lng=${lng}&name=和坑太平宫&type=car&policy=1`;
+                            // 修复域名和参数格式
+                            const amapWebUrl = `https://www.amap.com/map/navigation?lat=${lat}&lng=${lng}&name=${encodeURIComponent('和坑太平宫')}&type=car&policy=1`;
                             
                             if (device.isVIVO) {
-                                const intentUrl = `intent://navi/#Intent;scheme=amapuri;package=com.autonavi.minimap;action=android.intent.action.VIEW;category=android.intent.category.DEFAULT;component=com.autonavi.minimap/.api.bundle.MapActivity;S.dlat=${lat};S.dlon=${lng};S.dname=和坑太平宫;S.dev=0;S.t=0;end`;
+                                const intentUrl = `intent://navi/#Intent;scheme=amapuri;package=com.autonavi.minimap;action=android.intent.action.VIEW;category=android.intent.category.DEFAULT;component=com.autonavi.minimap/.api.bundle.MapActivity;S.dlat=${lat};S.dlon=${lng};S.dname=${encodeURIComponent('和坑太平宫')};S.dev=0;S.t=0;end`;
                                 window.location.href = intentUrl;
                                 setTimeout(() => window.open(amapWebUrl, '_blank'), 2000);
                             } else if (device.isAndroid) {
-                                const amapAndroidUrl = `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=和坑太平宫&dev=0&t=0`;
+                                const amapAndroidUrl = `amapuri://route/plan/?dlat=${lat}&dlon=${lng}&dname=${encodeURIComponent('和坑太平宫')}&dev=0&t=0`;
                                 window.location.href = amapAndroidUrl;
                                 setTimeout(() => window.open(amapWebUrl, '_blank'), 2000);
                             } else if (device.isIOS) {
-                                const amapIOSUrl = `iosamap://path?sourceApplication=applicationName&dlat=${lat}&dlon=${lng}&dname=和坑太平宫&dev=0&t=0`;
+                                const amapIOSUrl = `iosamap://path?sourceApplication=applicationName&dlat=${lat}&dlon=${lng}&dname=${encodeURIComponent('和坑太平宫')}&dev=0&t=0`;
                                 window.location.href = amapIOSUrl;
                                 setTimeout(() => window.open(amapWebUrl, '_blank'), 2000);
                             }
@@ -685,7 +708,3 @@
     </script>
 </body>
 </html>
-
-
-
-
